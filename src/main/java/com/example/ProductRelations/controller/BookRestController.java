@@ -24,8 +24,8 @@ public class BookRestController {
 
 
     @PostMapping("/books")
-    public void createProducts(@RequestBody Book book,Category categoryName, BookDescription annotation, BookParameter author) {
-        bookService.save(book,categoryName,annotation,author);
+    public void createProducts(@RequestBody Book book) {
+        bookService.save(book);
         System.out.println(book);
     }
 

@@ -84,10 +84,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void save(Book book, Category categoryName,BookDescription annotation, BookParameter author) {
-        book.setCategory(Arrays.asList(categoryName));
-        book.setBookParameter(author);
-        book.setBookDescription(annotation);
+    public void save(Book book) {
+//        book.setCategory(Arrays.asList(categoryName));
+//        book.setBookParameter(author);
+//        book.setBookDescription(annotation);
         bookRepository.save(book);
     }
 
