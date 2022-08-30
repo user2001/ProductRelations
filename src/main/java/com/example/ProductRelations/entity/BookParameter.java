@@ -9,12 +9,12 @@ public class BookParameter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String author;
 
-    @OneToMany(
-    cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
-    private List<Book > books;
+    @OneToMany(cascade = {CascadeType.PERSIST,
+            CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
+    private List<Book> books;
 
     public BookParameter(String author) {
         this.author = author;
@@ -46,5 +46,12 @@ public class BookParameter {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "BookParameter{" +
+                "author='" + author + '\'' +
+                '}';
     }
 }

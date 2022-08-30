@@ -1,17 +1,12 @@
 package com.example.ProductRelations.controller;
 
 import com.example.ProductRelations.entity.Book;
-import com.example.ProductRelations.entity.BookDescription;
-import com.example.ProductRelations.entity.BookParameter;
-import com.example.ProductRelations.entity.Category;
 import com.example.ProductRelations.service.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class BookRestController {
@@ -24,9 +19,9 @@ public class BookRestController {
 
 
     @PostMapping("/books")
-    public void createProducts(@RequestBody Book book) {
+    public Book saveBook(@RequestBody Book book) {
         bookService.save(book);
-        System.out.println(book);
+        return book;
     }
 
     @GetMapping("/books")

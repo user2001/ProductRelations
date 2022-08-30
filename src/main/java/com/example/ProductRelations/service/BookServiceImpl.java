@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
@@ -31,8 +30,13 @@ public class BookServiceImpl implements BookService {
         Book book4 = new Book("Harry Potter", new BigDecimal(240));
         Book book5 = new Book("The Runaways", new BigDecimal(180));
 
-        Category category1 = new Category("For kids");
-        Category category2 = new Category("For adults");
+        Category category1 = new Category("romantic");
+        Category category2 = new Category("classic");
+        Category category3 = new Category("funny");
+        Category category4 = new Category("relax");
+        Category category5 = new Category("philosophic");
+        Category category6 = new Category("for children");
+        Category category7 = new Category("for adults");
 
         BookParameter bookParameter1 = new BookParameter("Frederik Backman");
         BookParameter bookParameter2 = new BookParameter("J.D Rowling");
@@ -54,54 +58,35 @@ public class BookServiceImpl implements BookService {
                 "warmth and humor from one of the world's great writers.");
         book1.setBookDescription(bookDescription2);
         book1.setBookParameter(bookParameter1);
-        book1.setCategory(Arrays.asList(category2));
+        book1.setCategory(Arrays.asList(category2, category3, category7));
 
         book2.setBookDescription(bookDescription4);
         book2.setBookParameter(bookParameter1);
-        book2.setCategory(Arrays.asList(category2));
+        book2.setCategory(Arrays.asList(category2, category1, category5));
 
         book3.setBookDescription(bookDescription3);
         book3.setBookParameter(bookParameter3);
-        book3.setCategory(Arrays.asList(category2));
+        book3.setCategory(Arrays.asList(category2, category6, category4));
 
         book4.setBookDescription(bookDescription1);
         book4.setBookParameter(bookParameter2);
-        book4.setCategory(Arrays.asList(category1));
+        book4.setCategory(Arrays.asList(category4, category3, category5));
 
         book5.setBookDescription(bookDescription5);
         book5.setBookParameter(bookParameter4);
-        book5.setCategory(Arrays.asList(category1));
+        book5.setCategory(Arrays.asList(category7, category2, category5));
 
-        bookRepository.saveAll(Arrays.asList(book1,book2,book3,book4,book5));
-
+        bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4, book5));
     }
 
     @Override
-    @Transactional
     public Iterable<Book> getAll() {
-         return  bookRepository.findAll();
+        return bookRepository.findAll();
     }
 
     @Override
-    @Transactional
-    public void save(Book book) {
-//        book.setCategory(Arrays.asList(categoryName));
-//        book.setBookParameter(author);
-//        book.setBookDescription(annotation);
+    public Book save(Book book) {
         bookRepository.save(book);
+        return book;
     }
-
-//    @Override
-//    @Transactional
-//    public void deleteBook(Long bookId) {
-//        Book tempBook = entityManager.find(Book.class, bookId);
-//        entityManager.remove(tempBook);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public Book getBook(Long bookId) {
-//        return entityManager.find(Book.class, bookId);
-//    }
-
 }

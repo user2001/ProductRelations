@@ -17,14 +17,15 @@ public class Book {
     @JoinColumn(name = "book_description_id")
     private BookDescription bookDescription;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH,
+            CascadeType.MERGE, CascadeType.DETACH})
     @JoinTable(name = "Books_Categories",
-    joinColumns = @JoinColumn(name = "book_id",referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private List<Category> category;
 
-    @ManyToOne( cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
-    @JoinColumn(name = "book_parameter_id",referencedColumnName = "id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
+    @JoinColumn(name = "book_parameter_id")
     private BookParameter bookParameter;
 
     public Book() {
@@ -87,7 +88,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", title='" + title +
                 ", price=" + price +
                 ", bookDescription=" + bookDescription.getAnnotation() +
                 ", category=" + category +

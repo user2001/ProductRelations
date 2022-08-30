@@ -45,4 +45,13 @@ public class BookDescription {
     public void setBook(Book book) {
         this.book = book;
     }
+
+    @Override
+    public String toString() {
+        return "BookDescription{" +
+                "id=" + id +
+                ", annotation='" + annotation + '\'' +
+                ", book=" + book +
+                '}';
+    }
 }

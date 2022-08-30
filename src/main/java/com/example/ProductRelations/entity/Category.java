@@ -5,13 +5,11 @@ import java.util.List;
 
 @Entity
 public class Category {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String categoryName;
-
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
     @JoinTable
     private List<Book> books;
 
@@ -27,20 +25,20 @@ public class Category {
         this.id = id;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
     public List<Book> getBooks() {
         return books;
     }
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Category(String categoryName) {
@@ -50,7 +48,9 @@ public class Category {
     @Override
     public String toString() {
         return "Category{" +
-                "categoryName='" + categoryName + '\'' +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                ", books=" + books +
                 '}';
     }
 }
